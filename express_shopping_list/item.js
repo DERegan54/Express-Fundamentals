@@ -1,5 +1,3 @@
-// Item in shopping cart
-
 const items = require("./fakeDb");
 
 class Item {
@@ -30,19 +28,19 @@ class Item {
         if(itemFound === undefined){
             throw {message: "Item not found", status: 404}
         }
-        foundItem.name = data.name;
-        foundItem.price = data.price;
-        
+        itemFound.name = data.name;
+        itemFound.price = data.price;
+        console.log('itemFound', itemFound)
         return itemFound;
     }
 
     // After finding a specific item, removes it
     static remove(name) {
-        let itemIndex = index.findIndex(x => x.name === name);
-        if (itemIndex === -1) {
+        let itemFound = Item.find(name);
+        if (itemFound === undefined) {
             throw {message: "Item not found", status: 404}
         }
-        items.splice(itemIndex, 1);
+        items.splice(itemFound, 1);
     }
 };
 
